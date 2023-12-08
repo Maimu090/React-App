@@ -32,14 +32,20 @@
 //   )
 // }
 
+import React from "react";
 import Hello from "./components/Hello";
+
 const App = () => {
   console.log("Hello from component");
+  const name = "Peter";
+  const age = 10;
   return (
-    <div>
+    <>
       <h1>Greetings</h1>
-      <Hello />
-    </div>
+      <Hello name="Maryam" age={26 + 10} />
+      <Hello name={name} age={age} />
+      <Footer />
+    </>
   );
 };
 
