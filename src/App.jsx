@@ -37,16 +37,24 @@ import Hello from "./components/Hello";
 
 const App = () => {
   console.log("Hello from component");
-  const name = "Peter";
-  const age = 10;
-  return (
-    <>
-      <h1>Greetings</h1>
-      <Hello name="Maryam" age={26 + 10} />
-      <Hello name={name} age={age} />
-      <Footer />
-    </>
-  );
+  const course = {
+    name: "Half Stack application development",
+    parts: [
+      {
+        name: "Fundamentals of React",
+        exercises: 10,
+      },
+      {
+        name: "Using props to pass data",
+        exercises: 7,
+      },
+      {
+        name: "State of a component",
+        exercises: 14,
+      },
+    ],
+  };
+  return <div></div>;
 };
 
 export default App;
