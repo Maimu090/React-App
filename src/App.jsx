@@ -35,19 +35,50 @@
 import React, { useState } from "react";
 import Hello from "./components/Hello";
 
+const History = (props) => {
+  if (props.allClicks.length === 0) {
+    return <div>the app is used by pressing the buttons</div>;
+  }
+  return <div>button press history: {props.allClicks.join(" ")}</div>;
+};
+
+const Button = (props) => {
+  console.log(props)
+  const { handleClick, text } = props
+    return (
+<button onClick={handleClick}>
+  {text}
+</button>
+    )
+  
+}
+
 const App = () => {
   console.log("Hello from component");
+ const [age, setAge] = useState(0)
+ const [name, setName] = useState('Juha Tauriainen')
 
-  const [counter, setCounter] = useState(0);
+ if ( age > 10 ) {
+  const [foobar, setFoobar] = useState(null)
+ }
 
-  const increaseByOne = () => setCounter(counter + 1);
+for ( let i = 0; i < age; i++ ) {
+  const [rightWay, setRightWay] = useState(false)
+}
 
-  const setToZero = () => setCounter(0);
+const notGood = () => {
+  const [X, setX] = useState(-1000)
+}
+
+
+
   return (
     <div>
-      <div>{counter}</div>
-      <button onClick={increaseByOne}>plus</button>
-      <button onClick={setToZero}>zero</button>
+      {left}
+      <Button onClick={handleLeftClick}>left</button>
+      <Button onClick={handleRightClick}>right</button>
+      {right}
+      <History allClicks={allClicks} />
     </div>
   );
 };
