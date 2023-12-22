@@ -34,51 +34,78 @@
 
 import React, { useState } from "react";
 import Hello from "./components/Hello";
-
-const History = (props) => {
-  if (props.allClicks.length === 0) {
-    return <div>the app is used by pressing the buttons</div>;
+const Statistics = (props) => {
+  const sum = props.good + props.neutral + props.bad;
+  if (sum === 0) {
+    return (
+      <div>
+        <p>No feedback given</p>
+      </div>
+    );
   }
-  return <div>button press history: {props.allClicks.join(" ")}</div>;
+  return (
+    <table>
+      <tbody>
+        <StatisticLine text="good" value={props.good} />
+        <StatisticLine text="neutral" value={props.neutral} />
+        <StatisticLine text="bad" value={props.bad} />
+        <StatisticLine text="all" value={sum} />
+        <StatisticLine
+          text="average"
+          value={(props.good * 1 + props.neutral * 0 + props.bad * -1) / sum}
+        />
+        <StatisticLine
+          text="positive"
+          value={`${parseFloat(props.good / sum) * 100} %`}
+        />
+      </tbody>
+    </table>
+  );
+};
+
+const StatisticLine = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
+  );
 };
 
 const Button = (props) => {
-  console.log(props)
-  const { handleClick, text } = props
-    return (
-<button onClick={handleClick}>
-  {text}
-</button>
-    )
-  
-}
+  return (
+    <div>
+      <button onClick={props.handleClick}>{props.text}</button>
+    </div>
+  );
+};
 
 const App = () => {
   console.log("Hello from component");
- const [age, setAge] = useState(0)
- const [name, setName] = useState('Juha Tauriainen')
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
- if ( age > 10 ) {
-  const [foobar, setFoobar] = useState(null)
- }
+  const handleGoodClick = () => {
+    setGood(good + 1);
+  };
 
-for ( let i = 0; i < age; i++ ) {
-  const [rightWay, setRightWay] = useState(false)
-}
+  const handleNeutralClick = () => {
+    setNeutral(neutral + 1);
+  };
 
-const notGood = () => {
-  const [X, setX] = useState(-1000)
-}
-
-
+  const handleBadClick = () => {
+    setBad(bad + 1);
+  };
 
   return (
     <div>
-      {left}
-      <Button onClick={handleLeftClick}>left</button>
-      <Button onClick={handleRightClick}>right</button>
-      {right}
-      <History allClicks={allClicks} />
+      <h1>give feedback</h1>
+      <Button handleClick={handleGoodClick} text="good" />
+      <Button handleClick={handleNeutralClick} text="neutral" />
+      <Button handleClick={handleBadClick} text="bad" />
+      <h1>statistics</h1>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
